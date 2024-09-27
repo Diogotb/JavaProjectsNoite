@@ -21,7 +21,9 @@ public class ArraysAsListExemplo {
         } catch (Exception e) {
             e.printStackTrace();
         }finally{
-            System.out.println(nomes);
+            for (int i = 0; i < nomes.length; i++) {
+                System.out.println(nomes[i]);
+            }
         }  
     }
     //alterar uma lista
