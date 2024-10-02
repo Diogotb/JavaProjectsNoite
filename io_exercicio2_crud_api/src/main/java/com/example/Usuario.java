@@ -15,6 +15,6 @@ public class Usuario {
 
     @Override
     public String toString(){
-        return "Nome: "+nome+" Idade: "+idade;
+        return "ID: "+id+" Nome: "+nome+" Idade: "+idade;
     }
 }
