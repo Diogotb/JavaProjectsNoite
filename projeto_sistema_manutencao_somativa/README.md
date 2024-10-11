@@ -55,3 +55,4 @@ O sistema deve armazenar e recuperar dados de maneira segura e eficiente.
 ###Diagramas de Sequência(Uso / Fluxo)
 
 ![alt text](img\image.png)
+

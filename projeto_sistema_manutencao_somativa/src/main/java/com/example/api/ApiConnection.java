@@ -1,13 +1,16 @@
 package com.example.api;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class ApiConnection {
     private static final String API_URL = "http://localhost:3000/";
 
+    //métodos GET
     public static String getData(String endpoint) {
         try {
             URL url = new URL(API_URL + endpoint);
@@ -31,5 +34,36 @@ public class ApiConnection {
             return null;
         }
     }
+
+    //POST
+    public static void postData(String endPoint, String inputData){
+        try {
+            URL url = new URL(API_URL + endPoint);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type", "application/json; utf-8");
+            connection.setRequestProperty("Accept", "application/json");
+            connection.setDoOutput(true);// enviar dos dados para a API
+            
+            try (BufferedWriter bw = new BufferedWriter(
+                    new OutputStreamWriter(connection.getOutputStream(), "UTF-8"))) {
+                bw.write(inputData);
+                bw.flush();
+            }
+            // Verificar o status da resposta
+            int status = connection.getResponseCode();
+            if (status != HttpURLConnection.HTTP_CREATED) { // HTTP 201 Created
+                throw new Exception("Erro ao criar usuário: " + status);
+            }
+
+            System.out.println("Cadastro Realizado com Sucesso");
+            connection.disconnect();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
 }
