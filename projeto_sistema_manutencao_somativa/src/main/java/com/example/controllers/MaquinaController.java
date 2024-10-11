@@ -25,6 +25,7 @@ public class MaquinaController {
     }
 
     public void updateMaquina(int posicao,Maquina maquina){
+        MaquinaAPI.putMaquinas(maquina);//método para atualizar
         maquinas.set(posicao, maquina);
     }
 

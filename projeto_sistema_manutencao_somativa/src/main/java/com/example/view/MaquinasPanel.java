@@ -69,7 +69,10 @@ public class MaquinasPanel extends JPanel {
             }
             
         });
-
+        //metodo para atualizar info
+        btnSalvarAlteracoes.addActionListener(e-> {
+            
+        });
         
 
     }

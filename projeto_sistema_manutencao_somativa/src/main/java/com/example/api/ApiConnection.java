@@ -63,6 +63,36 @@ public class ApiConnection {
             e.printStackTrace();
         }
     }
+    // PUT
+    public static void putData(String endPoint, String inputData, String id){
+        try {
+            URL url = new URL(API_URL + endPoint + id);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("PUT");
+            connection.setRequestProperty("Content-Type", "application/json; utf-8");
+            connection.setRequestProperty("Accept", "application/json");
+            connection.setDoOutput(true);// enviar dos dados para a API
+            
+            try (BufferedWriter bw = new BufferedWriter(
+                    new OutputStreamWriter(connection.getOutputStream(), "UTF-8"))) {
+                bw.write(inputData);
+                bw.flush();
+            }
+            // Verificar o status da resposta
+            int status = connection.getResponseCode();
+            if (status != HttpURLConnection.HTTP_OK) { // HTTP 201 Created
+                throw new Exception("Erro ao criar usuário: " + status);
+            }
+
+            System.out.println("Cadastro Realizado com Sucesso");
+            connection.disconnect();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    //DELETE
 
 
 
