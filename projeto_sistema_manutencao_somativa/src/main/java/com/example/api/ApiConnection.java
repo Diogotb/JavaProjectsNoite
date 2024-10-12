@@ -66,7 +66,7 @@ public class ApiConnection {
     // PUT
     public static void putData(String endPoint, String inputData, String id){
         try {
-            URL url = new URL(API_URL + endPoint + id);
+            URL url = new URL(API_URL + endPoint + "/" + id);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("PUT");
             connection.setRequestProperty("Content-Type", "application/json; utf-8");
@@ -93,6 +93,26 @@ public class ApiConnection {
     }
 
     //DELETE
+    public static void deleteData(String endPoint, String id){
+        try {
+            URL url = new URL(API_URL + endPoint + "/" + id);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("DELETE");
+            connection.setDoOutput(true);// enviar dos dados para a API
+            
+            // Verificar o status da resposta
+            int status = connection.getResponseCode();
+            if (status != HttpURLConnection.HTTP_OK) { // HTTP 201 Created
+                throw new Exception("Erro ao deletar usuário: " + status);
+            }
+
+            System.out.println("Cadastro Realizado com Sucesso");
+            connection.disconnect();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
 
